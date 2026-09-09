@@ -1,0 +1,99 @@
+---
+import KpiTile from './ui/KpiTile.astro';
+import Badge from './ui/Badge.astro';
+---
+
+<section id="dashboard" class="py-12 md:py-20">
+  <div class="mx-auto max-w-[1280px] px-4 md:px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <h2 class="font-sans text-[28px] md:text-[34px] font-semibold tracking-tight text-ink leading-[1.05]" style="letter-spacing:-0.02em;">La foto completa, en una vista</h2>
+        <p class="mt-2 text-[14px] leading-[1.6] text-muted max-w-[60ch]">8 secciones, 12 gráficos Chart.js en la app real. Preview estático con KPIs y gráficos SVG ilustrativos.</p>
+      </div>
+      <Badge variant="info">12 gráficos · 8 secciones</Badge>
+    </div>
+
+    <!-- KPI row -->
+    <div data-reveal-grid class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <KpiTile label="Ingresos totales" value="8.6M CUP" subtext="USD 26.8k · +11.2% interanual" variant="success" trend="+340k" />
+      <KpiTile label="Ganancia neta" value="2.1M CUP" subtext="24.4% margen · snapshot tasa" variant="success" trend="+2.4 pp" />
+      <KpiTile label="Costo total" value="6.5M CUP" subtext="12 contenedores · prorrateo incl." variant="warning" trend="CUP/USD" />
+      <KpiTile label="Por cobrar" value="420k CUP" subtext="18 clientes · 3 vencidas" variant="danger" trend="18 cli." />
+    </div>
+
+    <!-- Charts -->
+    <div data-reveal-grid data-chart class="mt-6 grid lg:grid-cols-3 gap-4 md:gap-5">
+      <!-- Line -->
+      <div data-item data-hover-lift class="bg-white border border-border rounded-card shadow-card p-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-[13px] font-semibold text-ink">Ventas mensuales</h3>
+          <span class="font-mono text-[11px] text-muted">CUP · ejemplo</span>
+        </div>
+        <div class="mt-4">
+          <svg viewBox="0 0 300 120" class="w-full h-[120px]" role="img" aria-label="Gráfico de ventas mensuales en CUP, datos de ejemplo">
+            <line x1="30" y1="10" x2="30" y2="100" stroke="#E8E6E4" stroke-width="1"/>
+            <line x1="30" y1="100" x2="290" y2="100" stroke="#E8E6E4" stroke-width="1"/>
+            <!-- grid -->
+            <line x1="30" y1="30" x2="290" y2="30" stroke="#E8E6E4" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="30" y1="60" x2="290" y2="60" stroke="#E8E6E4" stroke-width="1" stroke-dasharray="3 3"/>
+            <!-- line -->
+            <polyline fill="none" stroke="#107C10" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="30,80 75,65 120,70 165,45 210,35 255,25" />
+            <!-- area -->
+            <polygon fill="rgba(16,124,16,0.08)" points="30,80 75,65 120,70 165,45 210,35 255,25 255,100 30,100" />
+            <!-- dots -->
+            <circle cx="30" cy="80" r="3" fill="#107C10" /><circle cx="75" cy="65" r="3" fill="#107C10" /><circle cx="120" cy="70" r="3" fill="#107C10" /><circle cx="165" cy="45" r="3" fill="#107C10" /><circle cx="210" cy="35" r="3" fill="#107C10" /><circle cx="255" cy="25" r="3" fill="white" stroke="#107C10" stroke-width="2"/>
+            <text x="30" y="115" font-size="8" font-family="IBM Plex Mono" fill="#6B6B6B">ENE</text><text x="75" y="115" font-size="8" font-family="IBM Plex Mono" fill="#6B6B6B">MAR</text><text x="120" y="115" font-size="8" font-family="IBM Plex Mono" fill="#6B6B6B">MAY</text><text x="165" y="115" font-size="8" font-family="IBM Plex Mono" fill="#6B6B6B">JUL</text><text x="210" y="115" font-size="8" font-family="IBM Plex Mono" fill="#6B6B6B">SEP</text><text x="250" y="115" font-size="8" font-family="IBM Plex Mono" fill="#6B6B6B">NOV</text>
+          </svg>
+        </div>
+        <p class="mt-2 text-[11px] font-mono text-muted">SVG estático · datos de ejemplo</p>
+      </div>
+
+      <!-- Donut -->
+      <div data-item data-hover-lift class="bg-white border border-border rounded-card shadow-card p-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-[13px] font-semibold text-ink">Estado de contenedores</h3>
+          <span class="font-mono text-[11px] text-muted">12 cont.</span>
+        </div>
+        <div class="mt-4 flex items-center gap-4">
+          <svg viewBox="0 0 100 100" class="w-[110px] h-[110px] shrink-0" role="img" aria-label="Donut de estado de contenedores">
+            <circle cx="50" cy="50" r="32" fill="none" stroke="#E8E6E4" stroke-width="14"/>
+            <circle cx="50" cy="50" r="32" fill="none" stroke="#107C10" stroke-width="14" stroke-dasharray="80 201" stroke-dashoffset="25" />
+            <circle cx="50" cy="50" r="32" fill="none" stroke="#0078D4" stroke-width="14" stroke-dasharray="50 201" stroke-dashoffset="-55" />
+            <circle cx="50" cy="50" r="32" fill="none" stroke="#B45E00" stroke-width="14" stroke-dasharray="60 201" stroke-dashoffset="-105" />
+            <text x="50" y="52" text-anchor="middle" font-size="10" font-family="IBM Plex Mono" font-weight="600" fill="#1A1A1A">12</text>
+            <text x="50" y="62" text-anchor="middle" font-size="6" font-family="IBM Plex Mono" fill="#6B6B6B">cont.</text>
+          </svg>
+          <ul class="text-[12px] space-y-1.5">
+            <li class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> En tránsito 40% · 5</li>
+            <li class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-info"></span> En puerto 25% · 3</li>
+            <li class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-warning"></span> Liberado 35% · 4</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bar -->
+      <div data-item data-hover-lift class="bg-white border border-border rounded-card shadow-card p-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-[13px] font-semibold text-ink">Costo por categoría</h3>
+          <span class="font-mono text-[11px] text-muted">CUP · ejemplo</span>
+        </div>
+        <div class="mt-4">
+          <svg viewBox="0 0 300 120" class="w-full h-[120px]" role="img" aria-label="Gráfico de barras de costo por categoría">
+            <line x1="30" y1="100" x2="290" y2="100" stroke="#E8E6E4" stroke-width="1"/>
+            <rect data-bar x="35" y="60" width="38" height="40" rx="4" fill="#107C10" />
+            <rect data-bar x="85" y="40" width="38" height="60" rx="4" fill="#0078D4" />
+            <rect data-bar x="135" y="75" width="38" height="25" rx="4" fill="#B45E00" />
+            <rect data-bar x="185" y="50" width="38" height="50" rx="4" fill="#107C10" opacity="0.7" />
+            <rect data-bar x="235" y="30" width="38" height="70" rx="4" fill="#C93434" opacity="0.85" />
+            <text x="54" y="115" text-anchor="middle" font-size="7" font-family="IBM Plex Mono" fill="#6B6B6B">ALIM</text>
+            <text x="104" y="115" text-anchor="middle" font-size="7" font-family="IBM Plex Mono" fill="#6B6B6B">ASEO</text>
+            <text x="154" y="115" text-anchor="middle" font-size="7" font-family="IBM Plex Mono" fill="#6B6B6B">FERR</text>
+            <text x="204" y="115" text-anchor="middle" font-size="7" font-family="IBM Plex Mono" fill="#6B6B6B">TEXT</text>
+            <text x="254" y="115" text-anchor="middle" font-size="7" font-family="IBM Plex Mono" fill="#6B6B6B">ELEC</text>
+          </svg>
+        </div>
+        <p class="mt-2 text-[11px] font-mono text-muted">Columnas alineadas · mono · % verde/rojo en app real</p>
+      </div>
+    </div>
+  </div>
+</section>

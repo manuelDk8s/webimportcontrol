@@ -1,0 +1,167 @@
+---
+---
+
+<section id="precios" class="py-10 md:py-16 bg-page border-t border-border">
+  <div class="mx-auto max-w-[1280px] px-4 md:px-6">
+    <div class="max-w-[760px] mx-auto text-center">
+      <p class="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1 font-mono text-[11px] font-semibold tracking-wide text-muted shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Planes · sin sorpresas · cancela cuando quieras
+      </p>
+      <h2 class="mt-3 font-sans text-[28px] md:text-[36px] font-semibold tracking-tight text-ink leading-[0.95] text-balance" style="letter-spacing: -0.02em;">Simple y trazable, como tu costo</h2>
+      <p class="mt-3 text-[14px] leading-[1.6] text-muted max-w-[60ch] mx-auto">Precios sugeridos según mercado SaaS de inventario + POS + importaciones (Odoo, Zoho Inventory, Veeqo: 29–149 USD/mes). Ajustados a Cuba con CUP/USD dual y tasa snapshot. Paga en la moneda que prefieras.</p>
+
+      <!-- Toggle mensual/anual -->
+      <div class="mt-6 inline-flex p-1 rounded-full bg-white border border-border shadow-sm" role="tablist" aria-label="Facturación">
+        <button id="bill-monthly" aria-selected="true" role="tab" class="h-8 px-4 rounded-full bg-ink text-white text-[13px] font-semibold">Mensual</button>
+        <button id="bill-yearly" aria-selected="false" role="tab" class="h-8 px-4 rounded-full text-ink text-[13px] font-medium hover:bg-page">Anual · −20%</button>
+      </div>
+      <p class="mt-2 font-mono text-[11px] text-muted">Precios de ejemplo — tú defines el final. Tasa de referencia 320 CUP/USD.</p>
+    </div>
+
+    <div data-pricing-grid class="mt-8 grid md:grid-cols-3 gap-4 md:gap-5 items-stretch">
+      <!-- Esencial -->
+      <div data-price-card class="pressable relative flex flex-col bg-white/80 backdrop-blur rounded-[20px] border border-border p-6 will-change-transform" style="backdrop-filter: blur(12px) saturate(160%);">
+        <div class="absolute inset-x-0 top-0 h-px bg-white/60 rounded-t-[20px] pointer-events-none"></div>
+        <p class="font-mono text-[11px] font-bold tracking-[0.12em] uppercase text-muted">Esencial</p>
+        <h3 class="mt-1 font-sans font-semibold text-[18px] text-ink tracking-tight">Para empezar sin Excel</h3>
+        <div class="mt-4">
+          <p class="flex items-baseline gap-1">
+            <span class="font-mono text-[32px] font-bold tracking-tight text-ink" data-price="esencial">$29</span>
+            <span class="text-[13px] text-muted" data-price-sub="esencial">/mes · 9,280 CUP</span>
+          </p>
+          <p class="font-mono text-[11px] text-muted">1 tienda · 2 usuarios · 5 contenedores/mes</p>
+        </div>
+        <ul class="mt-5 space-y-2.5 text-[13px] leading-[1.5] text-ink">
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Contenedores + productos + fichas CUP/USD</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> POS básico (1 caja, arqueo)</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Dashboard 8 secciones · 12 gráficos</li>
+          <li class="flex gap-2 text-muted"><span class="mt-1 w-4 h-4 rounded-full bg-border grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span> Sin dispatch ni auditoría avanzada</li>
+        </ul>
+        <a href="/solicitud" class="pressable mt-6 inline-flex items-center justify-center h-10 rounded-full border border-border bg-white text-ink text-[13px] font-semibold hover:bg-page">Solicitar Esencial</a>
+        <p class="mt-2 text-center font-mono text-[11px] text-muted">Ideal si migras tu primer Excel</p>
+      </div>
+
+      <!-- Profesional — popular -->
+      <div data-price-card class="pressable relative flex flex-col bg-ink text-white rounded-[20px] border border-ink p-6 shadow-[0_16px_48px_rgba(0,0,0,0.22)] will-change-transform scale-[1.02] md:-mt-2 md:mb-2">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full bg-primary text-white px-3 py-1 text-[11px] font-bold tracking-wide shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Más elegido
+        </div>
+        <div class="absolute inset-x-0 top-0 h-px bg-white/10 rounded-t-[20px] pointer-events-none"></div>
+        <p class="font-mono text-[11px] font-bold tracking-[0.12em] uppercase text-white/60">Profesional</p>
+        <h3 class="mt-1 font-sans font-semibold text-[18px] text-white tracking-tight">Para operar a diario</h3>
+        <div class="mt-4">
+          <p class="flex items-baseline gap-1">
+            <span class="font-mono text-[32px] font-bold tracking-tight text-white" data-price="profesional">$59</span>
+            <span class="text-[13px] text-white/60" data-price-sub="profesional">/mes · 18,880 CUP</span>
+          </p>
+          <p class="font-mono text-[11px] text-white/60">3 tiendas · 5 usuarios · contenedores ilimitados</p>
+        </div>
+        <ul class="mt-5 space-y-2.5 text-[13px] leading-[1.5] text-white">
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-white/15 grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Todo lo Esencial + gastos internos + tasas con histórico</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-white/15 grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> POS completo (turnos, retiros, precios por punto)</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-white/15 grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Almacén POS + consolidación + dispatch</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-white/15 grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Auditoría + RBAC (logística, cajera, gerencia)</li>
+        </ul>
+        <a href="/solicitud" class="pressable mt-6 inline-flex items-center justify-center h-10 rounded-full bg-primary text-white text-[13px] font-semibold hover:bg-[#0e6e0e] shadow-[0_4px_16px_rgba(16,124,16,0.35)]">Solicitar Profesional</a>
+        <p class="mt-2 text-center font-mono text-[11px] text-white/60">Equilibrio costo · control total</p>
+      </div>
+
+      <!-- Empresa -->
+      <div data-price-card class="pressable relative flex flex-col bg-white/80 backdrop-blur rounded-[20px] border border-border p-6 will-change-transform" style="backdrop-filter: blur(12px) saturate(160%);">
+        <div class="absolute inset-x-0 top-0 h-px bg-white/60 rounded-t-[20px] pointer-events-none"></div>
+        <p class="font-mono text-[11px] font-bold tracking-[0.12em] uppercase text-muted">Empresa</p>
+        <h3 class="mt-1 font-sans font-semibold text-[18px] text-ink tracking-tight">Para escalar sin perder trazabilidad</h3>
+        <div class="mt-4">
+          <p class="flex items-baseline gap-1">
+            <span class="font-mono text-[32px] font-bold tracking-tight text-ink" data-price="empresa">$119</span>
+            <span class="text-[13px] text-muted" data-price-sub="empresa">/mes · 38,080 CUP</span>
+          </p>
+          <p class="font-mono text-[11px] text-muted">Tiendas y usuarios ilimitados</p>
+        </div>
+        <ul class="mt-5 space-y-2.5 text-[13px] leading-[1.5] text-ink">
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Todo Profesional + documentos tipificados + comunicación</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Asistente IA 25 intents + offline-first + Feature Flags</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> RBAC completo + auditoría JSON + soporte prioritario</li>
+          <li class="flex gap-2"><span class="mt-1 w-4 h-4 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 8L7 11L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Onboarding + migración Excel asistida</li>
+        </ul>
+        <a href="/solicitud" class="pressable mt-6 inline-flex items-center justify-center h-10 rounded-full bg-ink text-white text-[13px] font-semibold hover:bg-black">Solicitar Empresa</a>
+        <p class="mt-2 text-center font-mono text-[11px] text-muted">Para operación multi-sede</p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-2 font-mono text-[11px] text-muted">
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-white border border-border px-3 py-1">Anual: 20% menos · Esencial $23 · Profesional $47 · Empresa $95</span>
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/15 text-primary px-3 py-1">Pago CUP o USD · snapshot de tasa protegido</span>
+    </div>
+    <p class="mt-3 text-center text-[11px] leading-relaxed text-muted max-w-[70ch] mx-auto">Sugerencia basada en mercado Cuba/LatAm: inventario+POS local suele cobrar 15,000–45,000 CUP/mes. ImportControl añade tracking + costeo dual, por eso el rango 9k–38k es competitivo. Ajusta según usuarios/tiendas; el anual da previsibilidad ante fluctuación cambiaria.</p>
+  </div>
+</section>
+
+<style>
+  .pressable:active { transform: scale(0.98); }
+  @media (prefers-reduced-motion: reduce) {
+    [data-price-card] { transform: none !important; opacity: 1 !important; }
+  }
+</style>
+
+<script>
+  import { animate, stagger } from 'animejs';
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const grid = document.querySelector('[data-pricing-grid]');
+  const cards = document.querySelectorAll('[data-price-card]');
+  if (grid && !prefersReduced) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animate(cards as any, {
+            opacity: [0,1],
+            translateY: [16,0],
+            scale: [0.97,1],
+            duration: 560,
+            delay: stagger(80),
+            easing: 'spring(1, 80, 12, 0)'
+          } as any);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    io.observe(grid);
+  }
+
+  // Toggle mensual/anual con spring + haptic
+  const monthlyBtn = document.getElementById('bill-monthly') as HTMLButtonElement;
+  const yearlyBtn = document.getElementById('bill-yearly') as HTMLButtonElement;
+  const prices: Record<string, { m: string; y: string; mSub: string; ySub: string }> = {
+    esencial: { m: '$29', y: '$23', mSub: '/mes · 9,280 CUP', ySub: '/mes · 7,424 CUP · anual' },
+    profesional: { m: '$59', y: '$47', mSub: '/mes · 18,880 CUP', ySub: '/mes · 15,104 CUP · anual' },
+    empresa: { m: '$119', y: '$95', mSub: '/mes · 38,080 CUP', ySub: '/mes · 30,464 CUP · anual' },
+  };
+  function setBilling(yearly: boolean) {
+    monthlyBtn.setAttribute('aria-selected', String(!yearly));
+    yearlyBtn.setAttribute('aria-selected', String(yearly));
+    monthlyBtn.className = yearly ? 'h-8 px-4 rounded-full text-ink text-[13px] font-medium hover:bg-page' : 'h-8 px-4 rounded-full bg-ink text-white text-[13px] font-semibold';
+    yearlyBtn.className = yearly ? 'h-8 px-4 rounded-full bg-ink text-white text-[13px] font-semibold' : 'h-8 px-4 rounded-full text-ink text-[13px] font-medium hover:bg-page';
+    (Object.keys(prices) as Array<keyof typeof prices>).forEach(k => {
+      const el = document.querySelector(`[data-price="${k}"]`) as HTMLElement;
+      const sub = document.querySelector(`[data-price-sub="${k}"]`) as HTMLElement;
+      if (!el || !sub) return;
+      const target = yearly ? prices[k].y : prices[k].m;
+      const subTarget = yearly ? prices[k].ySub : prices[k].mSub;
+      if (!prefersReduced) {
+        animate(el as any, { scale: [0.92, 1], duration: 260, easing: 'spring(1, 80, 12, 0)' } as any);
+        animate(sub as any, { opacity: [0.7, 1], duration: 200, easing: 'easeOutQuad' } as any);
+      }
+      el.textContent = target;
+      sub.textContent = subTarget;
+    });
+    if (navigator.vibrate) navigator.vibrate(8);
+  }
+  monthlyBtn?.addEventListener('click', () => setBilling(false));
+  yearlyBtn?.addEventListener('click', () => setBilling(true));
+  // Press feedback Apple §1
+  document.querySelectorAll('.pressable').forEach(el => {
+    el.addEventListener('pointerdown', () => { if (!prefersReduced) animate(el as any, { scale: 0.98, duration: 90, easing: 'easeOutQuad' } as any); });
+    el.addEventListener('pointerup', () => { if (!prefersReduced) animate(el as any, { scale: 1, duration: 320, easing: 'spring(1, 80, 12, 0)' } as any); });
+    el.addEventListener('pointerleave', () => { if (!prefersReduced) animate(el as any, { scale: 1, duration: 200, easing: 'easeOutQuad' } as any); });
+  });
+</script>

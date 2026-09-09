@@ -1,0 +1,205 @@
+---
+const nav = [
+  { label: 'Cómo funciona', href: '#como-funciona', icon: 'M8 6H16M8 10H16M8 14H12M16 14L14.5 16L12 14M12 4V5M12 19V20M4 12H5M19 12H20' },
+  { label: 'Módulos', href: '#modulos', icon: 'M3 3H8V8H3V3ZM14 3H21V8H14V3ZM3 14H8V21H3V14ZM14 14H21V21H14V14Z' },
+  { label: 'POS', href: '#pos', icon: 'M5 8H19M5 12H19M5 16H13M7 20H17M9 8V6C9 4.9 9.9 4 11 4H13C14.1 4 15 4.9 15 6V8' },
+  { label: 'Dashboard', href: '#dashboard', icon: 'M5 16L9 10L12 13L19 5M19 5H14M19 5V10M3 20H21' },
+  { label: 'Tecnología', href: '#tecnologia', icon: 'M12 3L20 7V12C20 16 16 20 12 21C8 20 4 16 4 12V7L12 3ZM12 9V14M12 17H12.01' },
+];
+---
+
+<header class="sticky top-0 z-40 h-[52px] bg-white/80 backdrop-blur-xl border-b border-border shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)] supports-[backdrop-filter]:bg-white/70">
+  <div class="mx-auto max-w-[1280px] h-full px-4 md:px-6 flex items-center justify-between gap-4">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 shrink-0 focus-visible:outline-none">
+      <span class="w-8 h-8 rounded-[8px] bg-primary text-white grid place-items-center font-mono text-[13px] font-semibold tracking-tight">IC</span>
+      <span class="font-sans font-semibold text-[15px] tracking-tight text-ink">ImportControl</span>
+      <span class="hidden sm:inline-flex items-center rounded-full bg-primary/10 text-primary text-[10px] font-mono font-semibold tracking-wide px-2 py-1">PLATAFORMA</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            data-nav-link={item.href}
+            class="nav-link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-medium text-muted hover:text-ink hover:bg-page transition-colors"
+            aria-current="false"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={item.icon} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-2">
+      <a href="/solicitud" class="inline-flex items-center justify-center h-8 px-5 rounded-full bg-primary text-white text-[13px] font-semibold hover:bg-[#0e6e0e] transition-colors shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+        Solicitar acceso
+      </a>
+    </div>
+
+    <!-- Mobile button -->
+    <button
+      id="menu-btn"
+      class="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-full border border-border bg-white text-ink hover:bg-page transition-colors"
+      aria-expanded="false"
+      aria-controls="mobile-drawer"
+      aria-label="Abrir menú"
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13.5M2.5 4H13.5M2.5 12H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div id="mobile-drawer" class="lg:hidden hidden absolute top-[52px] inset-x-0 bg-white border-b border-border shadow-card">
+    <nav class="px-4 py-4 flex flex-col gap-1" aria-label="Navegación móvil">
+      {
+        nav.map((item) => (
+          <a href={item.href} data-nav-link={item.href} class="nav-link inline-flex items-center gap-2.5 px-3 py-2.5 rounded-[10px] text-[14px] font-medium text-ink hover:bg-page transition-colors drawer-link">
+            <span class="nav-icon w-8 h-8 rounded-[8px] bg-page border border-border grid place-items-center text-muted shrink-0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={item.icon} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            {item.label}
+          </a>
+        ))
+      }
+      <div class="pt-3 mt-1 border-t border-border flex flex-col gap-2">
+        <a href="/solicitud" class="inline-flex items-center justify-center h-10 rounded-full bg-primary text-white font-semibold">Solicitar acceso</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const drawer = document.getElementById('mobile-drawer');
+  if (btn && drawer) {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      drawer.classList.toggle('hidden', expanded);
+      btn.setAttribute('aria-label', expanded ? 'Abrir menú' : 'Cerrar menú');
+    });
+    drawer.querySelectorAll('.drawer-link').forEach((a) => {
+      a.addEventListener('click', () => {
+        drawer.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (!drawer.classList.contains('hidden') && !drawer.contains(e.target as Node) && !btn.contains(e.target as Node)) {
+        drawer.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Scroll spy — marca el link activo según la sección visible
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+  const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href')!.slice(1));
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+
+  function setActive(id: string | null) {
+    navLinks.forEach(a => {
+      const isActive = a.getAttribute('href') === `#${id}`;
+      a.setAttribute('aria-current', isActive ? 'true' : 'false');
+      if (isActive) {
+        a.classList.add('bg-primary','!text-white','!border-primary','shadow-sm');
+        a.classList.remove('text-muted','text-ink','bg-page','hover:bg-page','bg-ink','!border-ink');
+        const iconWrap = a.querySelector('.nav-icon');
+        if (iconWrap) {
+          iconWrap.classList.add('!bg-white/20','!border-white/30','!text-white');
+          iconWrap.classList.remove('bg-page','border-border','text-muted','!bg-white/15','!border-white/20');
+        }
+      } else {
+        a.classList.remove('bg-ink','bg-primary','!text-white','!border-ink','!border-primary','shadow-sm');
+        a.classList.add('text-muted');
+        const iconWrap = a.querySelector('.nav-icon');
+        if (iconWrap) {
+          iconWrap.classList.remove('!bg-white/15','!bg-white/20','!border-white/20','!border-white/30','!text-white');
+          iconWrap.classList.add('bg-page','border-border','text-muted');
+        }
+      }
+    });
+  }
+
+  if (sections.length) {
+    const observer = new IntersectionObserver((entries) => {
+      // Elige la sección cuyo top esté más cerca del header (52px)
+      let candidate: HTMLElement | null = null;
+      let bestTop = Infinity;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const top = entry.boundingClientRect.top;
+          if (top <= 90 && top < bestTop) {
+            bestTop = top;
+            candidate = entry.target as HTMLElement;
+          }
+        }
+      });
+      if (!candidate) {
+        let minTop = Infinity;
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const top = entry.boundingClientRect.top;
+            if (top >= 0 && top < minTop) {
+              minTop = top;
+              candidate = entry.target as HTMLElement;
+            }
+          }
+        });
+      }
+      if (candidate) setActive(candidate.id);
+      // Asegura Tecnología al llegar al fondo (footer puede tapar observer)
+      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+      if (nearBottom) setActive(sectionIds[sectionIds.length - 1]);
+    }, {
+      rootMargin: '-52px 0px -40% 0px',
+      threshold: 0
+    });
+    sections.forEach(s => observer.observe(s));
+
+    // Estado inicial según hash o scroll
+    function updateInitial() {
+      const hash = location.hash.slice(1);
+      if (hash && sectionIds.includes(hash)) {
+        setActive(hash);
+        return;
+      }
+      // Si ningún observer ha disparado aún, marca el más cercano al top
+      let current: string | null = null;
+      let minTop = Infinity;
+      sections.forEach(s => {
+        const rect = s.getBoundingClientRect();
+        if (rect.top <= 80 && rect.top < minTop) {
+          minTop = rect.top;
+          current = s.id;
+        }
+      });
+      if (current) setActive(current);
+    }
+    updateInitial();
+    window.addEventListener('hashchange', () => setActive(location.hash.slice(1)));
+
+    // Fallback por scroll para bordes entre secciones
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        let current: string | null = null;
+        for (const s of sections) {
+          if (s.getBoundingClientRect().top <= 90) current = s.id;
+        }
+        // Si estás al fondo de la página, fuerza Tecnología (última sección)
+        const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+        if (nearBottom) current = sectionIds[sectionIds.length - 1];
+        if (current) setActive(current);
+        else setActive(null);
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+</script>

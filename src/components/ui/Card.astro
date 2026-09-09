@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+  hover?: boolean;
+  variant?: 'data' | 'feature' | 'mock';
+}
+const { hover = false, variant = 'feature' } = Astro.props;
+const { class: klass, ...rest } = Astro.props as any;
+const variantCls = variant === 'data'
+  ? 'bg-white border border-border rounded-card shadow-card'
+  : variant === 'mock'
+  ? 'bg-white border border-border rounded-mock shadow-mock'
+  : 'bg-white border border-border rounded-feature shadow-card';
+---
+
+<div {...rest} class:list={[variantCls, hover && "hover:shadow-card-hover hover:-translate-y-[1px] transition-all duration-200", klass]}>
+  <slot />
+</div>

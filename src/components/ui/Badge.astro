@@ -1,0 +1,18 @@
+---
+interface Props {
+  variant?: 'success' | 'info' | 'warning' | 'danger' | 'neutral';
+  class?: string;
+}
+const { variant = 'neutral' } = Astro.props;
+const map: Record<string,string> = {
+  success: 'bg-[#107C10]/10 text-[#107C10] border-[#107C10]/15',
+  info: 'bg-[#0078D4]/10 text-[#0078D4] border-[#0078D4]/15',
+  warning: 'bg-[#B45E00]/10 text-[#B45E00] border-[#B45E00]/15',
+  danger: 'bg-[#C93434]/10 text-[#C93434] border-[#C93434]/15',
+  neutral: 'bg-[#F3F6F2] text-muted border-border',
+};
+---
+
+<span class:list={["inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-mono font-medium tracking-wide", map[variant], Astro.props.class]}>
+  <slot />
+</span>

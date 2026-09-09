@@ -1,0 +1,57 @@
+---
+import Card from './ui/Card.astro';
+import SectionHeader from './ui/SectionHeader.astro';
+const items = [
+  {
+    title: 'Excel desactualizado',
+    desc: 'Una fuente única de verdad en tiempo real, sin versiones dispersas ni hojas desincronizadas.',
+    icon: 'M9 3H15M12 8V14M12 14L9 11M12 14L15 11M5 17H19M5 17L7 7H17L19 17',
+    color: 'text-danger bg-danger/10 border-danger/15',
+  },
+  {
+    title: 'Costos sin rentabilidad real',
+    desc: 'Ficha de costo con cálculo automático de rentabilidad en CUP y USD por producto.',
+    icon: 'M12 3V21M12 3C10 3 8 4 8 6.5C8 9 12 10 12 10C12 10 16 11 16 13.5C16 16 14 17 12 17M12 21C14 21 16 20 16 17.5C16 15 12 14 12 14C12 14 8 13 8 10.5C8 8 10 7 12 7',
+    color: 'text-warning bg-warning/10 border-warning/15',
+  },
+  {
+    title: 'Stock sin trazabilidad',
+    desc: 'Inventario conectado al contenedor de origen, con trazabilidad completa desde el puerto hasta la venta.',
+    icon: 'M3 7H21M3 7L5 17H19L21 7M7 7V5.5C7 4.67 7.67 4 8.5 4H15.5C16.33 4 17 4.67 17 5.5V7M9 11H15',
+    color: 'text-primary bg-primary/10 border-primary/15',
+  },
+];
+---
+
+<section class="py-12 md:py-20">
+  <div class="mx-auto max-w-[1280px] px-4 md:px-6">
+    <SectionHeader
+      eyebrow="Problema → Solución"
+      title="El dato manda. Lo demás, ruido."
+      description="Tres dolores reales de la importación en Cuba — resueltos sin Excel y sin papel."
+    />
+
+    <div data-reveal-grid class="mt-8 grid md:grid-cols-3 gap-5 md:gap-6">
+      {
+        items.map((item, i) => (
+          <Card class="relative overflow-hidden p-6 md:p-7 flex flex-col gap-4 group" hover data-item>
+            <div class:list={["absolute top-0 inset-x-0 h-[2px]", i===0 ? "bg-gradient-to-r from-[#C93434] to-[#FF6B6B]" : i===1 ? "bg-gradient-to-r from-[#B45E00] to-[#FF8C00]" : "bg-gradient-to-r from-[#107C10] to-[#4CAF50]"]}></div>
+            <div class:list={["w-11 h-11 rounded-[12px] border grid place-items-center shrink-0", item.color]}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d={item.icon} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-ink text-[16px] tracking-tight" style="letter-spacing: -0.01em;">{item.title}</h3>
+              <p class="mt-1.5 text-[14px] leading-[1.6] text-muted max-w-[32ch]">{item.desc}</p>
+            </div>
+            <div class="mt-auto pt-3 border-t border-border flex items-center gap-2 text-[12px] font-mono font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+              <span>Cómo lo resuelve ImportControl</span>
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,294 @@
+---
+import Badge from './ui/Badge.astro';
+const modulos = [
+  { icon: 'M3 7H21M3 11H21M7 15H17', title: 'Contenedores', que: 'Lifecycle de 9 estados (preparando → embarcado → en tránsito → en puerto → aduana → liberado → transportando → recibido → descargado) con eventos logísticos.', utilidad: 'Agrupa productos por embarque y da visibilidad total del viaje.', variant: 'info' },
+  { icon: 'M6 6H18M6 10H18M6 14H14M5 3H19C19.6 3 20 3.4 20 4V20C20 20.6 19.6 21 19 21H5C4.4 21 4 20.6 4 20V4C4 3.4 4.4 3 5 3Z', title: 'Productos', que: 'Catálogo por contenedor, con categorías, unidades y clasificación Tipo 1/2 automática según la ficha de costo.', utilidad: 'Inventario siempre vinculado a su origen.', variant: 'success' },
+  { icon: 'M12 3V21M9 9H15M9 15H15M7 3H17L21 7V21H7V3ZM15 3V7H21', title: 'Fichas de Costo', que: 'Costo total y unitario, precio de venta en CUP y USD, rentabilidad en % y monto, con snapshot de la tasa de cambio usada.', utilidad: 'Sabes cuánto ganas realmente, en las dos monedas.', variant: 'warning' },
+  { icon: 'M12 8C12 8 10 6 8 6C6 6 4 8 4 10C4 14 12 19 12 19C12 19 20 14 20 10C20 8 18 6 16 6C14 6 12 8 12 8ZM12 8V19', title: 'Gastos Internos', que: 'Combustible, salario, amortización, con prorrateo general o asignación directa a productos. Libro reversible.', utilidad: 'Ningún gasto operativo se queda fuera del costo real.', variant: 'warning' },
+  { icon: 'M12 3V21M8 7H16M8 11H16M8 15H16M7 3H17L21 7V21H7V3ZM15 3V7H21', title: 'Tasas de Cambio', que: 'Tasa diaria CUP/USD con histórico.', utilidad: 'Es la base de todo cálculo dual del sistema.', variant: 'info' },
+  { icon: 'M4 6H20M4 10H20M4 14H14M7 18H10M14 18H18', title: 'Ventas', que: 'Registro con importe y ganancia en CUP/USD, vinculado a ticket, almacén, caja y cliente; incluye ventas por cobrar.', utilidad: 'Cada venta queda trazada de punta a punta.', variant: 'success' },
+  { icon: 'M12 12C14.2 12 16 10.2 16 8C16 5.8 14.2 4 12 4C9.8 4 8 5.8 8 8C8 10.2 9.8 12 12 12ZM4 20C4 16.7 6.7 14 10 14H14C17.3 14 20 16.7 20 20V21H4V20Z', title: 'Clientes', que: 'CRUD con CI y contacto, con soporte para tickets nominativos.', utilidad: 'Control de deuda y relación comercial por cliente.', variant: 'info' },
+  { icon: 'M5 7H19M5 11H19M5 15H15M7 3H17L21 7V21H7V3ZM15 3V7H21M9 20H15', title: 'POS', que: 'Turnos con arqueo, tickets consecutivos por turno, precios por punto de venta, tasa diaria y retiros de caja.', utilidad: 'Caja siempre cuadrada y auditable.', variant: 'success' },
+  { icon: 'M3 8H21M5 8V17H19V8M7 12H17', title: 'Almacén POS', que: 'Transferencias de Central a Tienda, stock local, reparto a cajas, salidas a costo (merma, consumo, entrega).', utilidad: 'El stock en tienda nunca se pierde de vista.', variant: 'success' },
+  { icon: 'M7 7H17M7 11H17M7 15H13M5 3H19C19.6 3 20 3.4 20 4V20C20 20.6 19.6 21 19 21H5C4.4 21 4 20.6 4 20V4C4 3.4 4.4 3 5 3Z', title: 'Consolidación por Cajas (Ventas Cajas)', que: 'Resúmenes diarios en flujo borrador → confirmado → procesado que generan ventas reales; pensado para digitación masiva de planillas.', utilidad: 'Cierra el día rápido sin perder trazabilidad.', variant: 'info' },
+  { icon: 'M12 3L20 7V17L12 21L4 17V7L12 3ZM12 3V21M8 10H16M8 14H16', title: 'Dispatch', que: 'Cola pendiente → en preparación → lista → entregado, entre caja y almacén, para entregas físicas post-pago.', utilidad: 'Nadie se lleva algo que no se despachó formalmente.', variant: 'warning' },
+  { icon: 'M3 9H21M9 9V21M3 9L12 3L21 9V21H3V9Z', title: 'Inventario', que: 'Consumos internos, pérdidas (rotura, vencimiento), entregas y donaciones, todo con snapshot a costo.', utilidad: 'Cada salida de stock queda justificada y valorada.', variant: 'danger' },
+  { icon: 'M7 3H17L21 7V21H7V3ZM15 3V7H21M9 12H15M9 16H15', title: 'Documentos', que: 'Adjuntos tipificados (BL, factura, declaración aduanal) por contenedor.', utilidad: 'Toda la papelería de importación en un solo lugar.', variant: 'neutral' },
+  { icon: 'M5 12L9 8L12 11L19 4M5 20H19', title: 'Dashboard', que: 'Endpoint único con 8 secciones (resumen, financiero, ventas, inventario, logística, timeline, alertas, gráficos) y 12 gráficos con Chart.js.', utilidad: 'La foto completa del negocio en una sola vista.', variant: 'info' },
+  { icon: 'M8 10H16M8 14H13M12 3C16.97 3 21 7.03 21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3Z', title: 'Comunicación', que: 'Chat privado y grupal, con adjuntos, presencia en línea y notificaciones en tiempo real.', utilidad: 'El equipo coordina sin salir del sistema.', variant: 'info' },
+  { icon: 'M12 8C12 8 10 6 8 8C6 10 8 13 12 16C16 13 18 10 16 8C14 6 12 8 12 8ZM12 16V20M9 20H15', title: 'Asistente IA', que: 'Chat en lenguaje natural con cerca de 25 intents (stock, ventas, contenedores, costos), basado en reglas y sin persistencia.', utilidad: 'Preguntas rápidas sin tener que navegar reportes.', variant: 'success' },
+  { icon: 'M9 5H15M12 9V13M12 17H12.01M7 3H17L21 7V21H7V3ZM15 3V7H21', title: 'Auditoría', que: 'Log append-only con el antes y el después en JSON de cada cambio.', utilidad: 'Trazabilidad total de quién cambió qué y cuándo.', variant: 'danger' },
+  { icon: 'M12 12C14.2 12 16 10.2 16 8C16 5.8 14.2 4 12 4C9.8 4 8 5.8 8 8C8 10.2 9.8 12 12 12ZM5 20V18C5 15.8 6.8 14 9 14H15C17.2 14 19 15.8 19 18V20', title: 'Usuarios', que: 'Roles: admin, logística, compras, gerencia, viewer, cajera, jefe, despacho, con RBAC por permisos.', utilidad: 'Cada quien ve y hace solo lo que le corresponde.', variant: 'danger' },
+  { icon: 'M12 3L4 7V12C4 16 8 20 12 21C16 20 20 16 20 12V7L12 3ZM12 8V14M12 17H12.01', title: 'Core / Feature Flags + POS API', que: 'Kill-switch por módulo sin necesidad de despliegue, y API offline-first (SyncVersion, PosDevice, idempotencia por operation_id).', utilidad: 'El sistema sigue funcionando aunque falle la conexión, y se puede apagar un módulo puntual sin afectar el resto.', variant: 'ink' },
+];
+
+const variantStyles: Record<string, { bar: string; iconBg: string; iconColor: string; iconBorder: string }> = {
+  success: { bar: 'from-[#107C10] to-[#4CAF50]', iconBg: 'bg-[#107C10]/10', iconColor: 'text-[#107C10]', iconBorder: 'border-[#107C10]/15' },
+  info: { bar: 'from-[#0078D4] to-[#40A9FF]', iconBg: 'bg-[#0078D4]/10', iconColor: 'text-[#0078D4]', iconBorder: 'border-[#0078D4]/15' },
+  warning: { bar: 'from-[#B45E00] to-[#FF8C00]', iconBg: 'bg-[#B45E00]/10', iconColor: 'text-[#B45E00]', iconBorder: 'border-[#B45E00]/15' },
+  danger: { bar: 'from-[#C93434] to-[#FF6B6B]', iconBg: 'bg-[#C93434]/10', iconColor: 'text-[#C93434]', iconBorder: 'border-[#C93434]/15' },
+  neutral: { bar: 'from-[#6B6B6B] to-[#9E9E9E]', iconBg: 'bg-[#F3F6F2]', iconColor: 'text-[#6B6B6B]', iconBorder: 'border-[#E8E6E4]' },
+  ink: { bar: 'from-[#1A1A1A] to-[#4A4A4A]', iconBg: 'bg-[#1A1A1A]/5', iconColor: 'text-[#1A1A1A]', iconBorder: 'border-[#1A1A1A]/10' },
+};
+---
+
+<section id="modulos" class="py-12 md:py-20 bg-white">
+  <div class="mx-auto max-w-[1280px] px-4 md:px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div class="max-w-[760px]">
+        <p class="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-primary">Módulos</p>
+        <h2 class="mt-2 font-sans text-[28px] md:text-[34px] font-semibold tracking-tight text-ink leading-[1.05]" style="letter-spacing: -0.02em; line-height: 1.05;">19 módulos, un mismo flujo</h2>
+        <p class="mt-2 text-[14px] leading-[1.6] text-muted max-w-[60ch]">Texto exacto por módulo — sin inventar, sin omitir. Pulsa cualquier card para ver un preview con datos de muestra. Cada nodo es trazable.</p>
+      </div>
+      <Badge variant="neutral" class="self-start md:self-auto">Pulsa una card → preview 3D</Badge>
+    </div>
+
+    <div data-modulos-grid class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      {
+        modulos.map((m, i) => {
+          const v = variantStyles[m.variant] || variantStyles.neutral;
+          return (
+            <button data-modulo-card data-interactive="true" data-index={i} class="group pressable text-left relative flex flex-col overflow-hidden bg-white border border-border rounded-feature shadow-card hover:shadow-card-hover will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+              <div class={`h-[2px] w-full bg-gradient-to-r ${v.bar} opacity-80`}></div>
+              <div class="p-5 flex flex-col gap-3 flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div class={`w-10 h-10 rounded-[10px] border grid place-items-center shrink-0 ${v.iconBg} ${v.iconColor} ${v.iconBorder}`}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={m.icon} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <span class="font-mono text-[10px] font-bold tracking-[0.08em] text-muted border border-border rounded-full px-2 py-1 bg-page">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <h3 class="font-sans font-semibold text-[14px] text-ink leading-tight tracking-tight" style="letter-spacing: -0.01em;">{m.title}</h3>
+                <p class="text-[12.5px] leading-[1.6] text-muted line-clamp-3">{m.que}</p>
+                <div class="mt-auto pt-3 border-t border-border flex gap-2 items-start">
+                  <span class="mt-[5px] w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+                  <p class="text-[12px] leading-relaxed"><span class="font-semibold text-ink">Utilidad:</span> <span class="text-muted">{m.utilidad}</span></p>
+                </div>
+                <span class="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-primary opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">Ver preview <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+              <div class="absolute inset-0 rounded-feature pointer-events-none border border-transparent group-hover:border-primary/10 transition-colors"></div>
+            </button>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Modal 3D — Apple §7 anchored origin + §12 material + §3 interruptible -->
+<div id="modulo-modal" class="fixed inset-0 z-[60] hidden" aria-hidden="true" role="dialog" aria-modal="true">
+  <div id="modal-backdrop" class="absolute inset-0 bg-ink/35 backdrop-blur-[16px] opacity-0" style="backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);"></div>
+  <div id="modal-wrap" class="absolute inset-0 grid place-items-center p-4 md:p-6" style="perspective: 1200px;">
+    <div id="modal-card" class="relative w-full max-w-[640px] max-h-[88vh] overflow-hidden bg-white rounded-[20px] border border-white/40 shadow-[0_24px_64px_rgba(0,0,0,0.18),0_1px_3px_rgba(0,0,0,0.08)] opacity-0 will-change-transform" style="transform-style: preserve-3d;">
+      <!-- content injected by JS -->
+      <div id="modal-content" class="overflow-auto max-h-[88vh]"></div>
+      <button id="modal-close" class="pressable absolute top-3 right-3 w-8 h-8 rounded-full bg-ink text-white grid place-items-center hover:bg-black transition-colors" aria-label="Cerrar">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pressable:active { transform: scale(0.98); }
+  @media (prefers-reduced-motion: reduce) {
+    [data-modulo-card], #modal-card, #modal-backdrop { transform: none !important; }
+  }
+</style>
+
+<script>
+  import { animate, stagger } from 'animejs';
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const grid = document.querySelector('[data-modulos-grid]');
+  const cards = document.querySelectorAll<HTMLButtonElement>('[data-modulo-card]');
+
+  // Entrada — one authored moment, spring critically damped (§4)
+  if (grid && cards.length && !prefersReduced) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animate(cards as any, {
+            opacity: [0, 1],
+            translateY: [14, 0],
+            scale: [0.97, 1],
+            duration: 560,
+            delay: stagger(38),
+            easing: 'spring(1, 80, 12, 0)'
+          } as any);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    io.observe(grid);
+  }
+
+  // Interacción press — instant feedback (§1) + interruptible (§3)
+  cards.forEach(card => {
+    card.addEventListener('pointerdown', (e) => {
+      if (prefersReduced) return;
+      (card as HTMLElement).setPointerCapture((e as PointerEvent).pointerId);
+      animate(card as any, { scale: 0.98, duration: 90, easing: 'easeOutQuad' } as any);
+    });
+    card.addEventListener('pointerup', () => {
+      if (prefersReduced) return;
+      animate(card as any, { scale: 1, duration: 320, easing: 'spring(1, 80, 12, 0)' } as any);
+    });
+    card.addEventListener('pointerleave', () => {
+      if (!prefersReduced) animate(card as any, { scale: 1, duration: 200, easing: 'easeOutQuad' } as any);
+    });
+    card.addEventListener('pointercancel', () => {
+      animate(card as any, { scale: 1, duration: 200, easing: 'easeOutQuad' } as any);
+    });
+    card.addEventListener('mouseenter', () => {
+      if (prefersReduced || matchMedia('(hover: none)').matches) return;
+      animate(card as any, { translateY: -2, duration: 180, easing: 'easeOutQuad' } as any);
+    });
+    card.addEventListener('mouseleave', () => {
+      if (!prefersReduced) animate(card as any, { translateY: 0, duration: 260, easing: 'spring(1, 80, 12, 0)' } as any);
+    });
+  });
+
+  // --- Modal 3D ---
+  const modal = document.getElementById('modulo-modal') as HTMLElement;
+  const backdrop = document.getElementById('modal-backdrop') as HTMLElement;
+  const wrap = document.getElementById('modal-wrap') as HTMLElement;
+  const modalCard = document.getElementById('modal-card') as HTMLElement;
+  const modalContent = document.getElementById('modal-content') as HTMLElement;
+  const closeBtn = document.getElementById('modal-close') as HTMLElement;
+
+  const modulosData = [
+    { title: 'Contenedores', variant: 'info', que: 'Lifecycle de 9 estados con eventos logísticos.', utilidad: 'Agrupa productos por embarque y da visibilidad total del viaje.', preview: `<div class="divide-y divide-border"><div class="flex justify-between py-2.5 text-[13px]"><span class="font-mono">CNT-2026-014 · En tránsito</span><span class="rounded-full bg-info/10 text-info px-2 py-0.5 text-[11px] font-semibold">EN TRÁNSITO</span></div><div class="flex justify-between py-2.5 text-[13px]"><span class="font-mono">CNT-2026-013 · En puerto</span><span class="rounded-full bg-warning/10 text-warning px-2 py-0.5 text-[11px] font-semibold">EN PUERTO</span></div><div class="flex justify-between py-2.5 text-[13px]"><span class="font-mono">CNT-2026-012 · Recibido</span><span class="rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[11px] font-semibold">RECIBIDO</span></div></div><p class="mt-3 font-mono text-[11px] text-muted">9 estados: preparando → descargado. Cada cambio deja evento con fecha y responsable.</p>` },
+    { title: 'Productos', variant: 'success', que: 'Catálogo por contenedor, con Tipo 1/2 automático.', utilidad: 'Inventario siempre vinculado a su origen.', preview: `<div class="grid grid-cols-3 gap-2 text-center"><div class="rounded-[12px] bg-page border border-border p-3"><p class="font-mono text-[11px] text-muted">Arroz 1kg</p><p class="font-mono font-bold text-ink">500 u</p><p class="text-[11px] text-primary font-semibold">Tipo 1</p></div><div class="rounded-[12px] bg-page border border-border p-3"><p class="font-mono text-[11px] text-muted">Aceite 0.9L</p><p class="font-mono font-bold text-ink">200 u</p><p class="text-[11px] text-warning font-semibold">Tipo 2</p></div><div class="rounded-[12px] bg-page border border-border p-3"><p class="font-mono text-[11px] text-muted">Leche 1kg</p><p class="font-mono font-bold text-ink">120 u</p><p class="text-[11px] text-primary font-semibold">Tipo 1</p></div></div>` },
+    { title: 'Fichas de Costo', variant: 'warning', que: 'Costo total/unitario, precio CUP/USD, rentabilidad % y monto con snapshot de tasa.', utilidad: 'Sabes cuánto ganas realmente, en las dos monedas.', preview: `<div class="rounded-[12px] border border-border p-3 bg-page"><div class="flex justify-between text-[12px]"><span class="text-muted">Costo unitario</span><span class="font-mono font-bold">1,680 CUP · 5.25 USD</span></div><div class="flex justify-between text-[12px] mt-1"><span class="text-muted">Precio venta</span><span class="font-mono font-bold text-primary">2,450 CUP · 7.65 USD</span></div><div class="mt-2 pt-2 border-t border-border flex justify-between"><span class="font-mono text-[11px] font-bold text-primary">+45.8% · +770 CUP</span><span class="font-mono text-[11px] text-muted">Tasa 320 CUP snapshot</span></div></div>` },
+    { title: 'Gastos Internos', variant: 'warning', que: 'Combustible, salario, amortización con prorrateo o asignación directa. Libro reversible.', utilidad: 'Ningún gasto operativo se queda fuera del costo real.', preview: `<ul class="divide-y divide-border text-[13px]"><li class="py-2 flex justify-between"><span>Combustible</span><span class="font-mono">12,400 CUP</span></li><li class="py-2 flex justify-between"><span>Salario</span><span class="font-mono">8,200 CUP</span></li><li class="py-2 flex justify-between"><span>Amortización</span><span class="font-mono">3,900 CUP</span></li></ul><p class="mt-2 font-mono text-[11px] text-muted">Prorrateo general 68% · directa 32% · reversible</p>` },
+    { title: 'Tasas de Cambio', variant: 'info', que: 'Tasa diaria CUP/USD con histórico.', utilidad: 'Es la base de todo cálculo dual del sistema.', preview: `<div class="rounded-[12px] bg-page border border-border p-3"><svg viewBox="0 0 200 60" class="w-full h-[60px]"><polyline fill="none" stroke="#0078D4" stroke-width="2.5" points="10,45 40,38 70,42 100,28 130,22 170,16"/><circle cx="170" cy="16" r="3" fill="#0078D4"/></svg><div class="flex justify-between font-mono text-[11px] text-muted mt-1"><span>315</span><span class="font-bold text-ink">320 CUP hoy</span><span>325</span></div></div>` },
+    { title: 'Ventas', variant: 'success', que: 'Importe y ganancia CUP/USD vinculado a ticket, almacén, caja y cliente; incluye por cobrar.', utilidad: 'Cada venta queda trazada de punta a punta.', preview: `<div class="divide-y divide-border text-[13px]"><div class="py-2 flex justify-between"><span class="font-mono">#042-018 · Ana R.</span><span class="font-mono font-semibold text-primary">2,450 CUP</span></div><div class="py-2 flex justify-between"><span class="font-mono">#042-019 · Por cobrar</span><span class="font-mono font-semibold text-warning">1,680 CUP</span></div></div>` },
+    { title: 'Clientes', variant: 'info', que: 'CRUD con CI y contacto, tickets nominativos.', utilidad: 'Control de deuda y relación comercial por cliente.', preview: `<div class="divide-y divide-border text-[13px]"><div class="py-2 flex justify-between"><span>Ana Ruiz · 92092812345</span><span class="font-mono text-warning">820 CUP debe</span></div><div class="py-2 flex justify-between"><span>Carlos M. · 850112...</span><span class="font-mono text-primary">Al día</span></div></div>` },
+    { title: 'POS', variant: 'success', que: 'Turnos con arqueo, tickets consecutivos, precios por punto, tasa diaria y retiros.', utilidad: 'Caja siempre cuadrada y auditable.', preview: `<div class="rounded-[12px] bg-ink text-white p-3 text-center"><p class="font-mono text-[11px] text-white/70">Turno #042 · Total</p><p class="font-mono text-[18px] font-bold">38 tickets · 1.24M CUP</p><p class="font-mono text-[11px] text-white/60">Arqueo: sin descuadre ✓</p></div>` },
+    { title: 'Almacén POS', variant: 'success', que: 'Transferencias Central→Tienda, stock local, reparto a cajas, salidas a costo.', utilidad: 'El stock en tienda nunca se pierde de vista.', preview: `<div class="flex items-center gap-2 text-[13px]"><span class="px-2 py-1 rounded-full bg-info/10 text-info font-mono text-[11px]">Central 500u</span><span>→</span><span class="px-2 py-1 rounded-full bg-primary/10 text-primary font-mono text-[11px]">Tienda 120u</span><span class="px-2 py-1 rounded-full bg-warning/10 text-warning font-mono text-[11px]">Caja 38u</span></div>` },
+    { title: 'Consolidación por Cajas', variant: 'info', que: 'Borrador → confirmado → procesado que generan ventas reales; digitación masiva.', utilidad: 'Cierra el día rápido sin perder trazabilidad.', preview: `<div class="flex gap-2"><span class="flex-1 text-center py-2 rounded-full bg-border text-muted font-mono text-[11px]">Borrador</span><span class="flex-1 text-center py-2 rounded-full bg-warning/10 text-warning font-mono text-[11px]">Confirmado</span><span class="flex-1 text-center py-2 rounded-full bg-primary text-white font-mono text-[11px]">Procesado ✓</span></div>` },
+    { title: 'Dispatch', variant: 'warning', que: 'Pendiente → en preparación → lista → entregado, entre caja y almacén.', utilidad: 'Nadie se lleva algo que no se despachó formalmente.', preview: `<div class="flex gap-2 text-[12px]"><span class="px-2 py-1 rounded-full bg-border">Pendiente 4</span><span class="px-2 py-1 rounded-full bg-warning/10 text-warning">Preparación 2</span><span class="px-2 py-1 rounded-full bg-primary text-white">Listo 3</span></div>` },
+    { title: 'Inventario', variant: 'danger', que: 'Consumos, pérdidas, entregas y donaciones con snapshot a costo.', utilidad: 'Cada salida de stock queda justificada y valorada.', preview: `<ul class="divide-y divide-border text-[13px]"><li class="py-2 flex justify-between"><span>Merma arroz · rotura</span><span class="font-mono text-danger">-420 CUP</span></li><li class="py-2 flex justify-between"><span>Entrega donación</span><span class="font-mono text-muted">-1,200 CUP</span></li></ul>` },
+    { title: 'Documentos', variant: 'neutral', que: 'BL, factura, declaración aduanal por contenedor.', utilidad: 'Toda la papelería de importación en un solo lugar.', preview: `<div class="grid grid-cols-3 gap-2"><div class="rounded-[10px] border border-border p-3 text-center"><p class="font-mono text-[11px]">BL.pdf</p><p class="text-[11px] text-muted">2.4 MB</p></div><div class="rounded-[10px] border border-border p-3 text-center"><p class="font-mono text-[11px]">Factura.xlsx</p><p class="text-[11px] text-muted">88 KB</p></div><div class="rounded-[10px] border border-border p-3 text-center"><p class="font-mono text-[11px]">Aduana.pdf</p><p class="text-[11px] text-muted">1.1 MB</p></div></div>` },
+    { title: 'Dashboard', variant: 'info', que: '8 secciones, 12 gráficos Chart.js.', utilidad: 'La foto completa del negocio en una sola vista.', preview: `<div class="grid grid-cols-3 gap-2 text-center"><div class="rounded-[10px] bg-page border border-border p-2"><p class="font-mono text-[11px] text-muted">Ingresos</p><p class="font-mono font-bold">8.6M</p></div><div class="rounded-[10px] bg-primary text-white p-2"><p class="font-mono text-[11px] text-white/70">Ganancia</p><p class="font-mono font-bold">2.1M</p></div><div class="rounded-[10px] bg-page border border-border p-2"><p class="font-mono text-[11px] text-muted">Margen</p><p class="font-mono font-bold text-primary">24.4%</p></div></div>` },
+    { title: 'Comunicación', variant: 'info', que: 'Chat privado/grupal, adjuntos, presencia y notificaciones.', utilidad: 'El equipo coordina sin salir del sistema.', preview: `<div class="space-y-2 text-[13px]"><div class="bg-page rounded-[12px] p-2">Juan: ¿Llegó CNT-014? <span class="font-mono text-[10px] text-muted">10:42</span></div><div class="bg-primary text-white rounded-[12px] p-2 ml-6">Sí, en puerto. <span class="text-white/70 font-mono text-[10px]">10:43 ✓✓</span></div></div>` },
+    { title: 'Asistente IA', variant: 'success', que: '~25 intents por reglas, sin persistencia.', utilidad: 'Preguntas rápidas sin navegar reportes.', preview: `<div class="space-y-1.5 font-mono text-[12px]"><div class="bg-page border border-border rounded-[10px] px-3 py-2">¿Stock de arroz? → 500u (Tipo 1)</div><div class="bg-page border border-border rounded-[10px] px-3 py-2">¿Rentabilidad media? → 38.2%</div></div>` },
+    { title: 'Auditoría', variant: 'danger', que: 'Log append-only con antes/después JSON.', utilidad: 'Trazabilidad total de quién cambió qué y cuándo.', preview: `<div class="font-mono text-[11px] bg-ink text-white rounded-[10px] p-3 overflow-auto">{"antes":{"estado":"En puerto"},"después":{"estado":"Aduana"},"por":"admin"}</div>` },
+    { title: 'Usuarios', variant: 'danger', que: 'RBAC: admin, logística, compras, gerencia, viewer, cajera, jefe, despacho.', utilidad: 'Cada quien ve y hace solo lo que le corresponde.', preview: `<div class="flex flex-wrap gap-2"><span class="px-2 py-1 rounded-full bg-ink text-white font-mono text-[11px]">admin</span><span class="px-2 py-1 rounded-full bg-info/10 text-info font-mono text-[11px]">logística</span><span class="px-2 py-1 rounded-full bg-success/10 text-success font-mono text-[11px]">cajera</span><span class="px-2 py-1 rounded-full bg-warning/10 text-warning font-mono text-[11px]">viewer</span></div>` },
+    { title: 'Core / Feature Flags', variant: 'ink', que: 'Kill-switch por módulo + POS API offline-first.', utilidad: 'Sigue operando sin conexión; apaga un módulo sin afectar el resto.', preview: `<div class="flex justify-between items-center py-2 text-[13px]"><span>POS API</span><span class="w-10 h-5 rounded-full bg-primary relative"><span class="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-white"></span></span></div><div class="flex justify-between items-center py-2 text-[13px]"><span>Dispatch</span><span class="w-10 h-5 rounded-full bg-border relative"><span class="absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white"></span></span></div>` },
+  ];
+
+  const variantBar: Record<string,string> = {
+    success: 'from-[#107C10] to-[#4CAF50]', info: 'from-[#0078D4] to-[#40A9FF]', warning: 'from-[#B45E00] to-[#FF8C00]', danger: 'from-[#C93434] to-[#FF6B6B]', neutral: 'from-[#6B6B6B] to-[#9E9E9E]', ink: 'from-[#1A1A1A] to-[#4A4A4A]'
+  };
+
+  let activeIdx: number | null = null;
+  let lastFocused: HTMLElement | null = null;
+
+  function renderModal(idx: number) {
+    const m = modulosData[idx] as any;
+    const v = (variantBar as any)[m.variant] || variantBar.neutral;
+    modalContent.innerHTML = `
+      <div class="h-[3px] w-full bg-gradient-to-r ${v}"></div>
+      <div class="p-6">
+        <div class="flex gap-3 items-start pr-8">
+          <div class="w-11 h-11 rounded-[12px] bg-page border border-border grid place-items-center shrink-0">
+            <span class="font-mono text-[11px] font-bold text-muted">${String(idx+1).padStart(2,'0')}</span>
+          </div>
+          <div>
+            <h3 class="font-sans font-semibold text-[18px] text-ink leading-tight" style="letter-spacing:-0.015em;">${m.title}</h3>
+            <p class="mt-1 text-[12.5px] leading-[1.6] text-muted">${m.que}</p>
+          </div>
+        </div>
+        <div class="mt-4 rounded-[14px] bg-page border border-border p-3 flex gap-2 items-start">
+          <span class="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+          <p class="text-[12px] leading-relaxed"><span class="font-semibold text-ink">Utilidad:</span> ${m.utilidad}</p>
+        </div>
+        <div class="mt-5">
+          <p class="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-muted">Vista previa · datos de muestra</p>
+          <div class="mt-2 rounded-[14px] border border-border bg-white p-4 shadow-sm">${m.preview}</div>
+          <p class="mt-2 font-mono text-[11px] text-muted text-center">Datos de muestra ilustrativos · no producción</p>
+        </div>
+        <div class="mt-6 flex gap-2">
+          <a href="/solicitud" class="flex-1 inline-flex items-center justify-center h-10 rounded-full bg-primary text-white text-[13px] font-semibold hover:bg-[#0e6e0e]">Solicitar acceso</a>
+          <button data-close-modal class="flex-1 h-10 rounded-full border border-border bg-white text-ink text-[13px] font-medium">Cerrar</button>
+        </div>
+      </div>
+    `;
+    modalContent.querySelector('[data-close-modal]')?.addEventListener('click', closeModal);
+  }
+
+  function openModal(idx: number, anchor: HTMLElement) {
+    activeIdx = idx;
+    lastFocused = document.activeElement as HTMLElement;
+    renderModal(idx);
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    // Anchor origin — symmetric path (§7): scale from card position
+    const rect = anchor.getBoundingClientRect();
+    const originX = ((rect.left + rect.width/2) / window.innerWidth) * 100;
+    const originY = ((rect.top + rect.height/2) / window.innerHeight) * 100;
+    modalCard.style.transformOrigin = `${originX}% ${originY}%`;
+
+    if (prefersReduced) {
+      backdrop.style.opacity = '1';
+      modalCard.style.opacity = '1';
+      modalCard.style.transform = 'none';
+      closeBtn.focus();
+      return;
+    }
+    // Materialize: blur + scale together (§12)
+    backdrop.style.opacity = '0';
+    modalCard.style.opacity = '0';
+    modalCard.style.transform = 'perspective(1200px) rotateY(-10deg) scale(0.96) translateY(8px)';
+    animate(backdrop as any, { opacity: [0,1], duration: 280, easing: 'easeOutQuad' } as any);
+    animate(modalCard as any, {
+      opacity: [0,1],
+      scale: [0.96,1],
+      translateY: [8,0],
+      rotateY: [-10,0],
+      duration: 520,
+      easing: 'spring(1, 80, 12, 0)'
+    } as any);
+    if (navigator.vibrate) navigator.vibrate(10);
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    if (prefersReduced) {
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lastFocused?.focus();
+      return;
+    }
+    animate(modalCard as any, {
+      opacity: [1,0],
+      scale: [1,0.97],
+      rotateY: [0,6],
+      duration: 220,
+      easing: 'easeOutQuad'
+    } as any);
+    animate(backdrop as any, { opacity: [1,0], duration: 200, easing: 'easeOutQuad' } as any).then(() => {
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lastFocused?.focus();
+    });
+    if (navigator.vibrate) navigator.vibrate(6);
+  }
+
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => openModal(i, card));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(i, card);
+      }
+    });
+  });
+  backdrop.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', closeModal);
+  wrap.addEventListener('click', (e) => { if (e.target === wrap) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+</script>

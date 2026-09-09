@@ -1,0 +1,28 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border bg-white">
+  <div class="mx-auto max-w-[1280px] px-4 md:px-6 py-8 md:py-10">
+    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div class="flex items-center gap-3.5">
+        <span class="w-9 h-9 rounded-[10px] bg-primary text-white grid place-items-center font-mono text-[13px] font-semibold tracking-tight shadow-sm">IC</span>
+        <div>
+          <p class="text-[14px] font-semibold text-ink leading-none tracking-tight" style="letter-spacing:-0.01em;">ImportControl · Plataforma de gestión integral</p>
+          <p class="text-[12px] text-muted mt-1">Tracking + Costeo dual CUP/USD + Rentabilidad real + POS</p>
+        </div>
+      </div>
+      <nav class="flex flex-wrap gap-5 text-[13px] text-muted" aria-label="Enlaces del pie">
+        <a href="#como-funciona" class="hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Cómo funciona</a>
+        <a href="#modulos" class="hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Módulos</a>
+        <a href="#dashboard" class="hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Dashboard</a>
+        <a href="#tecnologia" class="hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Tecnología</a>
+        <a href="/solicitud" class="inline-flex items-center gap-1 font-semibold text-primary hover:text-[#0e6e0e]">Solicitar acceso <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+      </nav>
+    </div>
+    <div class="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row gap-2 justify-between text-[12px] text-muted">
+      <span>© {year} ImportControl. Todos los derechos reservados.</span>
+      <span class="font-mono">Hecho para la realidad cubana de doble moneda · Datos de ejemplo ilustrativos</span>
+    </div>
+  </div>
+</footer>
